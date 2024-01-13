@@ -20,6 +20,9 @@ namespace character
 
         Spine.EventData eventData;
 
+        private Camera cam;
+        private Renderer renderer;
+
         void OnValidate () {
             if (skeletonAnimation == null) GetComponent<SkeletonAnimation>();
             if (audioSource == null) GetComponent<AudioSource>();
@@ -33,6 +36,11 @@ namespace character
 
             eventData = skeletonAnimation.Skeleton.Data.FindEvent(eventName);
             skeletonAnimation.AnimationState.Event += HandleAnimationStateEvent;
+
+            cam = Camera.main;
+            renderer = GetComponent<MeshRenderer>();
+            if (renderer == null)
+                renderer = GetComponent<SpriteRenderer>();
         }
 
         private void HandleAnimationStateEvent (TrackEntry trackEntry, Event e)
@@ -56,7 +64,13 @@ namespace character
 
         public void Play (float volume) {
             audioSource.pitch = basePitch + Random.Range(-randomPitchOffset, randomPitchOffset);
-            audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Length)], volume);
+            if (IsObjectVisible(cam, renderer))
+                audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Length)], volume);
+        }
+        
+        private bool IsObjectVisible(Camera cam, Renderer renderer)
+        {
+            return GeometryUtility.TestPlanesAABB(GeometryUtility.CalculateFrustumPlanes(cam), renderer.bounds);
         }
     }
 }

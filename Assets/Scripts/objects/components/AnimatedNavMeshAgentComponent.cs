@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
@@ -6,9 +7,10 @@ using UnityEngine.AI;
 
 namespace objects.components
 {
+    [RequireComponent(typeof(NavMeshAgent))]
     public class AnimatedNavMeshAgentComponent : MonoBehaviour
     {
-        public NavMeshAgent agent;
+        [HideInInspector] public NavMeshAgent agent;
         private Quaternion initialRotation;
         public SkeletonAnimation skeletonAnimation;
         [SpineAnimation(dataField: "skeletonAnimation", fallbackToTextField: true)]
@@ -23,15 +25,16 @@ namespace objects.components
 
         private TrackEntry walkTrack;
         private TrackEntry runTrack;
-        
+
+        private void Awake()
+        {
+            agent = GetComponent<NavMeshAgent>();
+        }
+
         private void Start()
         {
             initialRotation = transform.rotation;
-            skeletonAnimation.state.SetAnimation(0, idleAnimation, true);
-            walkTrack = skeletonAnimation.state.SetAnimation(1, walkAnimation, true);
-            walkTrack.Alpha = 0.0f;    
-            runTrack = skeletonAnimation.state.SetAnimation(2, runAnimation, true);
-            runTrack.Alpha = 0.0f;
+            Activate(true);
         }
 
         void Update()
@@ -74,7 +77,18 @@ namespace objects.components
         private void SetFlip (float horizontal)
         {
             if (horizontal == 0) return;
-            skeletonAnimation.Skeleton.ScaleX = horizontal > 0 ? -1f : 1f;
+            TurnFace(horizontal > 0);
+        }
+
+        public void TurnFace(bool right)
+        {
+            skeletonAnimation.Skeleton.ScaleX = right ? -1f : 1f;
+        }
+
+        public void TurnFace(Vector3 to)
+        {
+            var hor = to.x - transform.position.x;
+            SetFlip(hor);
         }
 
         public bool HasPath()
@@ -85,6 +99,21 @@ namespace objects.components
         public void Stop()
         {
             agent.SetDestination(transform.position);
+        }
+
+        public void Activate(bool enabled)
+        {
+            agent.enabled = enabled;
+            this.enabled = enabled;
+
+            if (enabled)
+            {
+                skeletonAnimation.state.SetAnimation(0, idleAnimation, true);
+                walkTrack = skeletonAnimation.state.SetAnimation(1, walkAnimation, true);
+                walkTrack.Alpha = 0.0f;    
+                runTrack = skeletonAnimation.state.SetAnimation(2, runAnimation, true);
+                runTrack.Alpha = 0.0f;
+            }
         }
         
     }

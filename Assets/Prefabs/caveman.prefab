@@ -49,7 +49,6 @@ GameObject:
   - component: {fileID: 1093136445193048761}
   - component: {fileID: 274209036376399918}
   - component: {fileID: 4349599711652920012}
-  - component: {fileID: 1587212969474384298}
   m_Layer: 7
   m_Name: caveman
   m_TagString: Untagged
@@ -164,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 49a3e6efb738d98459e9efd80e00213c, type: 2}
-  initialSkinName: 
+  initialSkinName: skin_1
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -293,18 +292,6 @@ MonoBehaviour:
   maxIdleTime: 3
   stoppingDistance: 0.1
   maxRunningTime: 5
---- !u!114 &1587212969474384298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7621585778010174915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c42d6ba4911245dfa1f77b2c4a8515c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8284202326301115391
 GameObject:
   m_ObjectHideFlags: 0

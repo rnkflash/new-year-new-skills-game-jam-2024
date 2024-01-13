@@ -28,7 +28,7 @@ namespace ui
             if (Math.Abs(value - newValue) < 0.01) return;
             value = newValue;
             slider.value = value;
-            mixer.SetFloat(exposedParameter, value*40.0f - 40.0f);
+            mixer.SetFloat(exposedParameter, value*80.0f - 80.0f);
             Save();
         }
 

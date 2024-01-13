@@ -6,20 +6,21 @@ namespace objects
     public class Fruit : Actor, IEatable, IDamageable, ICarryable
     {
         public Collider collider;
+        public Rigidbody rigidBody;
         
-        public void StartEating()
+        public void StartBeingEaten()
         {
-            collider.enabled = false;
+            ActivateRigidBody(false);
         }
 
-        public int Eat()
+        public int OnBitten()
         {
             return 0;
         }
 
-        public void FinishEating()
+        public void FinishBeingEating()
         {
-            collider.enabled = true;
+            ActivateRigidBody(true);
         }
 
         public void Damage(int amount)
@@ -29,17 +30,24 @@ namespace objects
 
         public void OnStartCarry()
         {
-            collider.enabled = false;
+            ActivateRigidBody(false);
         }
 
         public void OnStopCarry()
         {
-            collider.enabled = true;
+            ActivateRigidBody(true);
         }
 
         public override bool IsAlive()
         {
             return true;
+        }
+
+        private void ActivateRigidBody(bool yes)
+        {
+            collider.enabled = yes;
+            rigidBody.isKinematic = !yes;
+            rigidBody.useGravity = yes;
         }
     }
 }

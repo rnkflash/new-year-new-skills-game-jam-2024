@@ -3,8 +3,8 @@
     public interface IEatable
     {
         
-        public void StartEating();
-        public int Eat();
-        public void FinishEating();
+        public void StartBeingEaten();
+        public int OnBitten();
+        public void FinishBeingEating();
     }
 }

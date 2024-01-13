@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4918766128160655374}
   - component: {fileID: 5715464420194951960}
   - component: {fileID: 7051251273395795029}
+  - component: {fileID: 1453596467498643704}
   m_Layer: 0
   m_Name: palms
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 11ab86fb8ecda574c921546a5d95aa36, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ac076fe8ace85e429bf860574cd27ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,6 +106,25 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.15
-  m_Height: 9.27
+  m_Height: 5.72
   m_Direction: 1
-  m_Center: {x: 0.02, y: 4.2627163, z: 0}
+  m_Center: {x: 0.02, y: 2.76, z: 0}
+--- !u!114 &1453596467498643704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147092274944467475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
